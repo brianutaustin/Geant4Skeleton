@@ -1,14 +1,16 @@
 #ifndef LSEventAction_h
 #define LSEventAction_h 1
 
+#include "LSRunAction.hh"
+
+#include "G4RunManager.hh"
+#include "G4Event.hh"
 #include "G4UserEventAction.hh"
 #include "globals.hh"
 
 class LSRunAction;
 
-/// Event action class
-class LSEventAction : public G4UserEventAction
-{
+class LSEventAction : public G4UserEventAction {
 public:
   LSEventAction(LSRunAction* runAction);
   virtual ~LSEventAction();
@@ -18,7 +20,6 @@ public:
 
 private:
   LSRunAction* fRunAction;
-
 };
 
 #endif

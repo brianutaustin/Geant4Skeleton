@@ -8,6 +8,7 @@
 #include "G4String.hh"
 
 #include "LSDetectorConstruction.hh"
+#include "LSPhysicsList.hh"
 #include "LSActionInitialization.hh"
 
 #include "QGSP_BIC_HP.hh"
@@ -29,9 +30,7 @@ int main(int argc, char ** argv) {
 
   runManager->SetUserInitialization(new LSDetectorConstruction());
 
-  G4VModularPhysicsList * physicsList = new QGSP_BIC_HP;
-  physicsList->SetVerboseLevel(1);
-  runManager->SetUserInitialization(physicsList);
+  runManager->SetUserInitialization(new LSPhysicsList());
 
   runManager->SetUserInitialization(new LSActionInitialization());
 
