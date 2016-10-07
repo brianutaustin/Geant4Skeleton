@@ -6,6 +6,7 @@
 #include "G4RunManager.hh"
 #include "G4Event.hh"
 #include "G4UserEventAction.hh"
+#include "G4TrajectoryContainer.hh"
 #include "globals.hh"
 
 class LSRunAction;
