@@ -11,7 +11,7 @@ LSPhysicsList::LSPhysicsList() : G4VModularPhysicsList() {
   /**
    * Optical Physics
    */
-  /*
+
   G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
   opticalPhysics->SetScintillationYieldFactor(1.0);
   opticalPhysics->SetScintillationExcitationRatio(0.0);
@@ -20,7 +20,6 @@ LSPhysicsList::LSPhysicsList() : G4VModularPhysicsList() {
   opticalPhysics->SetTrackSecondariesFirst(kCerenkov, true);
   opticalPhysics->SetTrackSecondariesFirst(kScintillation, false);
   RegisterPhysics(opticalPhysics);
-  */
 }
 
 LSPhysicsList::~LSPhysicsList() {

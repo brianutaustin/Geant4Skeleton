@@ -13,6 +13,8 @@ public:
   virtual void PreUserTrackingAction(const G4Track*);
   virtual void PostUserTrackingAction(const G4Track*);
 
+private:
+  G4int trkID;
 };
 
 #endif
