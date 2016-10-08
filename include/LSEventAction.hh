@@ -18,7 +18,7 @@ public:
   virtual void EndOfEventAction(const G4Event* event);
 
 private:
-  LSRunAction* fRunAction;
+  G4int evtID;
 };
 
 #endif

@@ -7,11 +7,15 @@ LSRunAction::~LSRunAction() {
 }
 
 void LSRunAction::BeginOfRunAction(const G4Run * run) {
-  G4int runID = run->GetRunID();
+  runID = run->GetRunID();
   G4cout << "Run number: " << runID << " started." << G4endl;
+
+  return;
 }
 
 void LSRunAction::EndOfRunAction(const G4Run * run) {
-  G4int runID = run->GetRunID();
-  G4cout << "Run number: " << runID << " ended." << G4endl;
+  runID = run->GetRunID();
+  G4cout << "----------------------------------------------------------" << G4endl << G4endl << G4endl;
+
+  return;
 }

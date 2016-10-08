@@ -8,8 +8,8 @@ LSPrimaryGeneratorAction::LSPrimaryGeneratorAction() : G4VUserPrimaryGeneratorAc
   G4String particleName;
   G4ParticleDefinition * particle = particleTable->FindParticle(particleName = "e-");
   fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
-  fParticleGun->SetParticleEnergy(1. * GeV);
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1., 0., 0.));
+  fParticleGun->SetParticleEnergy(2. * MeV);
 }
 
 LSPrimaryGeneratorAction::~LSPrimaryGeneratorAction() {

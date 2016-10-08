@@ -2,6 +2,7 @@
 #define LSTrackingAction_h 1
 
 #include "G4UserTrackingAction.hh"
+#include "G4SystemOfUnits.hh"
 #include "G4Track.hh"
 #include "globals.hh"
 
