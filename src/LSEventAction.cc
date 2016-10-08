@@ -1,6 +1,6 @@
 #include "LSEventAction.hh"
 
-LSEventAction::LSEventAction(LSRunAction * runAction) : G4UserEventAction() {
+LSEventAction::LSEventAction() : G4UserEventAction() {
 }
 
 LSEventAction::~LSEventAction() {

@@ -4,6 +4,8 @@
 #include "LSPrimaryGeneratorAction.hh"
 #include "LSEventAction.hh"
 #include "LSRunAction.hh"
+#include "LSTrackingAction.hh"
+#include "LSSteppingAction.hh"
 
 #include "G4VUserActionInitialization.hh"
 

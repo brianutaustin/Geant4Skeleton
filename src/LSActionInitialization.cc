@@ -12,8 +12,12 @@ void LSActionInitialization::Build() const {
   LSRunAction* runAction = new LSRunAction();
   SetUserAction(runAction);
 
-  LSEventAction* eventAction = new LSEventAction(runAction);
+  LSEventAction* eventAction = new LSEventAction();
   SetUserAction(eventAction);
 
-  //SetUserAction(new LSSteppingAction(eventAction));
+  LSTrackingAction* trackingAction = new LSTrackingAction();
+  SetUserAction(trackingAction);
+
+  LSSteppingAction* steppingAction = new LSSteppingAction();
+  SetUserAction(steppingAction);
 }
