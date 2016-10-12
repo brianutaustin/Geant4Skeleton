@@ -1,6 +1,8 @@
 #ifndef LSRunAction_h
 #define LSRunAction_h 1
 
+#include "LSAnalysis.hh"
+
 #include "G4UserRunAction.hh"
 #include "G4Parameter.hh"
 #include "G4RunManager.hh"

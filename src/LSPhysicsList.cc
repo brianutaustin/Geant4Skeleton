@@ -13,12 +13,19 @@ LSPhysicsList::LSPhysicsList() : G4VModularPhysicsList() {
    */
 
   G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
+  opticalPhysics->Configure(kCerenkov, true);
+  opticalPhysics->Configure(kScintillation, false);
+  opticalPhysics->Configure(kAbsorption, false);
+  opticalPhysics->Configure(kMieHG, false);
+  opticalPhysics->Configure(kRayleigh, false);
+  opticalPhysics->Configure(kBoundary, false);
+  opticalPhysics->Configure(kWLS, false);
   opticalPhysics->SetScintillationYieldFactor(1.0);
   opticalPhysics->SetScintillationExcitationRatio(0.0);
   opticalPhysics->SetMaxNumPhotonsPerStep(100);
   opticalPhysics->SetMaxBetaChangePerStep(10.0);
-  opticalPhysics->SetTrackSecondariesFirst(kCerenkov, true);
-  opticalPhysics->SetTrackSecondariesFirst(kScintillation, false);
+  //opticalPhysics->SetTrackSecondariesFirst(kCerenkov, false);
+  //opticalPhysics->SetTrackSecondariesFirst(kScintillation, true);
   RegisterPhysics(opticalPhysics);
 }
 

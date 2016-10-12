@@ -8,7 +8,7 @@ LSDetectorConstruction::~LSDetectorConstruction() {
 
 void LSDetectorConstruction::BuildMaterial() {
   G4NistManager * nist = G4NistManager::Instance();
-  G4double z, a, density;
+  //G4double z, a, density;
 
   // Air
   fAir = nist->FindOrBuildMaterial("G4_AIR");
@@ -17,7 +17,8 @@ void LSDetectorConstruction::BuildMaterial() {
   fAl = nist->FindOrBuildMaterial("G4_Al");
 
   // Liquid Argon (Properties data taken from LArSOFT)
-  fLAr = new G4Material("LAr",z = 18., a = 39.948 * g/mole, density = 1.3954 * g/cm3);
+  // fLAr = new G4Material("LAr", z = 18., a = 39.948 * g/mole, density = 1.3954 * g/cm3);
+  fLAr = nist->FindOrBuildMaterial("G4_lAr");
   G4double LAr_ScintEnergy[] = {6.0*eV, 6.7*eV, 7.1*eV, 7.4*eV, 7.7*eV, 7.9*eV, 8.1*eV, 8.4*eV,  8.5*eV, 8.6*eV, 8.8*eV, 9.0*eV, 9.1*eV, 9.4*eV, 9.8*eV, 10.4*eV, 10.7*eV};
   const G4int LArScintNum = sizeof(LAr_ScintEnergy)/sizeof(G4double);
   G4double LAr_SCINT[] = {0.0, 0.04, 0.12, 0.27, 0.44, 0.62, 0.80, 0.91, 0.92, 0.85, 0.70, 0.50, 0.31, 0.13, 0.04,  0.01, 0.0};
@@ -35,11 +36,11 @@ void LSDetectorConstruction::BuildMaterial() {
   fLAr_mt->AddProperty("SLOWCOMPONENT", LAr_ScintEnergy, LAr_SCINT, LArScintNum);
   fLAr_mt->AddProperty("RINDEX",        LAr_RIndEnergy, LAr_RIND,  LArRIndNum);
   fLAr_mt->AddProperty("ABSLENGTH",     LAr_AbsLEnergy, LAr_ABSL,  LArAbsLNum);
-  fLAr_mt->AddConstProperty("SCINTILLATIONYIELD",24000./MeV);
-  fLAr_mt->AddConstProperty("RESOLUTIONSCALE",1.0);
-  fLAr_mt->AddConstProperty("FASTTIMECONSTANT",6.*ns);
-  fLAr_mt->AddConstProperty("SLOWTIMECONSTANT",1590.*ns);
-  fLAr_mt->AddConstProperty("YIELDRATIO",0.3);
+  fLAr_mt->AddConstProperty("SCINTILLATIONYIELD", 24000./MeV);
+  fLAr_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
+  fLAr_mt->AddConstProperty("FASTTIMECONSTANT", 6.*ns);
+  fLAr_mt->AddConstProperty("SLOWTIMECONSTANT", 1590.*ns);
+  fLAr_mt->AddConstProperty("YIELDRATIO", 0.3);
   fLAr->SetMaterialPropertiesTable(fLAr_mt);
   fLAr->GetIonisation()->SetBirksConstant(0.69*mm/MeV);
 
@@ -48,7 +49,7 @@ void LSDetectorConstruction::BuildMaterial() {
 
 G4VPhysicalVolume * LSDetectorConstruction::Construct() {
   BuildMaterial();
-  
+
   // Overlapping check
   G4bool checkOverlaps = true;
 

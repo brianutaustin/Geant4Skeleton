@@ -5,6 +5,10 @@
 #include "G4SystemOfUnits.hh"
 #include "G4Track.hh"
 #include "globals.hh"
+#include "G4OpticalPhoton.hh"
+#include "G4VProcess.hh"
+
+#include "LSAnalysis.hh"
 
 class LSTrackingAction : public G4UserTrackingAction {
 public:
