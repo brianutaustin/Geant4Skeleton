@@ -22,5 +22,6 @@ void LSActionInitialization::Build() const {
   LSSteppingAction* steppingAction = new LSSteppingAction();
   SetUserAction(steppingAction);
 */
+
   return;
 }

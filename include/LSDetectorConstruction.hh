@@ -63,6 +63,7 @@ private:
   G4Material * fAir;
   G4Material * fLAr;
   G4Material * fAl;
+  G4Material * fBGO;
 
   /**
    * MATERIAL PROPERTY TABLE

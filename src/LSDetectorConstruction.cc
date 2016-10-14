@@ -16,6 +16,9 @@ void LSDetectorConstruction::BuildMaterial() {
   // Aluminum
   fAl = nist->FindOrBuildMaterial("G4_Al");
 
+  // BGO
+  fBGO = nist->FindOrBuildMaterial("G4_BGO");
+
   // Liquid Argon (Properties data taken from LArSOFT)
   // fLAr = new G4Material("LAr", z = 18., a = 39.948 * g/mole, density = 1.3954 * g/cm3);
   fLAr = nist->FindOrBuildMaterial("G4_lAr");

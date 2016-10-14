@@ -9,7 +9,7 @@ LSPrimaryGeneratorAction::LSPrimaryGeneratorAction() : G4VUserPrimaryGeneratorAc
   G4ParticleDefinition * particle = particleTable->FindParticle(particleName = "mu-");
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(1., 0., 0.));
-  fParticleGun->SetParticleEnergy(100. * MeV);
+  fParticleGun->SetParticleEnergy(1000. * MeV);
 }
 
 LSPrimaryGeneratorAction::~LSPrimaryGeneratorAction() {

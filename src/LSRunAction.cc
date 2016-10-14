@@ -12,7 +12,8 @@ void LSRunAction::BeginOfRunAction(const G4Run * run) {
 
   G4AnalysisManager *AnalysisMan = G4AnalysisManager::Instance();
   AnalysisMan->OpenFile("OutputData");
-  AnalysisMan->CreateH1("OPW", "Optical Photon Wavelength", 50, 110, 210);
+  AnalysisMan->CreateH1("CPW", "Cherenkov Photon Wavelength", 100, 10, 2100);
+  AnalysisMan->CreateH1("CAD", "Cherenkov Angle Distribution", 90, 0, 90);
   G4cout << "Analysis Histogram is initialized." << G4endl;
 
   return;
