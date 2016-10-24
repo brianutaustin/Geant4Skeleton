@@ -1,6 +1,7 @@
 #include "LSPrimaryGeneratorAction.hh"
 
 LSPrimaryGeneratorAction::LSPrimaryGeneratorAction(const char * inputfile) {
+  //G4cout << "------------------LSPrimaryGeneratorAction" << G4endl;
   // define a particle gun
   particleGun = new G4ParticleGun();
 
@@ -43,13 +44,16 @@ LSPrimaryGeneratorAction::LSPrimaryGeneratorAction(const char * inputfile) {
 }
 
 LSPrimaryGeneratorAction::~LSPrimaryGeneratorAction() {
+  //G4cout << "------------------~LSPrimaryGeneratorAction" << G4endl;
 }
 
 void LSPrimaryGeneratorAction::InputCRY() {
+  //G4cout << "------------------InputCRY" << G4endl;
   InputState = 1;
 }
 
 void LSPrimaryGeneratorAction::UpdateCRY(std::string * MessInput) {
+  //G4cout << "------------------UpdateCRY" << G4endl;
   CRYSetup * setup = new CRYSetup(*MessInput, "./data");
 
   gen = new CRYGenerator(setup);
@@ -62,6 +66,7 @@ void LSPrimaryGeneratorAction::UpdateCRY(std::string * MessInput) {
 }
 
 void LSPrimaryGeneratorAction::CRYFromFile(G4String newValue) {
+  //G4cout << "------------------CRYFromFile" << G4endl;
   // Read the cry input file
   std::ifstream inputFile;
 
@@ -91,6 +96,7 @@ void LSPrimaryGeneratorAction::CRYFromFile(G4String newValue) {
 }
 
 void LSPrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent) {
+  //G4cout << "------------------GeneratePrimaries" << G4endl;
   if (InputState != 0) {
     G4String * str = new G4String("CRY library was not successfully initialized");
     // G4Exception(*str);
@@ -99,6 +105,7 @@ void LSPrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent) {
   }
   G4String particleName;
   vect->clear();
+  gen->timeSimulated();
   gen->genEvent(vect);
 
   // ....debug output
@@ -110,6 +117,7 @@ void LSPrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent) {
     particleName = CRYUtils::partName((*vect)[j]->id());
 
     // ....debug output
+
     G4cout << "  "          << particleName << " "
          << "charge="      << (*vect)[j]->charge() << " "
          << std::setprecision(4)
@@ -122,7 +130,9 @@ void LSPrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent) {
 
     particleGun->SetParticleDefinition(particleTable->FindParticle((*vect)[j]->PDGid()));
     particleGun->SetParticleEnergy((*vect)[j]->ke() * MeV);
-    particleGun->SetParticlePosition(G4ThreeVector((*vect)[j]->x() * m, (*vect)[j]->y() * m, (*vect)[j]->z() * m));
+    //particleGun->SetParticlePosition(G4ThreeVector((*vect)[j]->x() * m, (*vect)[j]->y() * m, (*vect)[j]->z() * m));
+    //Dung changed this for the cosmic ray for the whole volume.
+    particleGun->SetParticlePosition(G4ThreeVector((*vect)[j]->x() * m, (*vect)[j]->y() * m, 3 * m));
     particleGun->SetParticleMomentumDirection(G4ThreeVector((*vect)[j]->u(), (*vect)[j]->v(), (*vect)[j]->w()));
     particleGun->SetParticleTime((*vect)[j]->t());
     particleGun->GeneratePrimaryVertex(anEvent);

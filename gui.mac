@@ -1,9 +1,2 @@
-#
-# This file permits to customize, with commands,
-# the menu bar of the G4UIXm, G4UIQt, G4UIWin32 sessions.
-# It has no effect with G4UIterminal.
-#
-# Process vis.mac (and draw geometry)
-#
 /run/initialize
-/run/beamOn 1
+/run/beamOn 10

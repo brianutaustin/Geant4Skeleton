@@ -26,6 +26,7 @@ include(${Geant4_USE_FILE})
 # NB: headers are included so they will show up in IDEs
 #
 include_directories(${PROJECT_SOURCE_DIR}/include
+                    ${PROJECT_SOURCE_DIR}/data
                     ${Geant4_INCLUDE_DIR}
                     /home/dphan/Simulation/UTKLChips/cry_v1.7/src)
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
@@ -47,6 +48,10 @@ target_link_libraries(LSsim ${Geant4_LIBRARIES} /home/dphan/Simulation/UTKLChips
 set(LSsim_SCRIPTS
   vis.mac
   gui.mac
+  setup.file
+  ./data/cosmics_0.data
+  ./data/cosmics_2100.data
+  ./data/cosmics_11300.data
   )
 
 foreach(_script ${LSsim_SCRIPTS})
@@ -56,8 +61,3 @@ foreach(_script ${LSsim_SCRIPTS})
     COPYONLY
     )
 endforeach()
-
-#----------------------------------------------------------------------------
-# Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
-#
-install(TARGETS LSsim DESTINATION bin)

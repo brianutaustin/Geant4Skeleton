@@ -14,13 +14,15 @@ void LSActionInitialization::Build() const {
 
   LSEventAction* eventAction = new LSEventAction();
   SetUserAction(eventAction);
-
+/*
   LSTrackingAction* trackingAction = new LSTrackingAction();
   SetUserAction(trackingAction);
+ */
 
+/*
   LSSteppingAction* steppingAction = new LSSteppingAction();
   SetUserAction(steppingAction);
-
+*/
 
   return;
 }

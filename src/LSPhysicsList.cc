@@ -1,12 +1,21 @@
 #include "LSPhysicsList.hh"
 
 LSPhysicsList::LSPhysicsList() : G4VModularPhysicsList() {
-  SetVerboseLevel(1);
+  SetVerboseLevel(0);
 
   /**
    * EM Physics
    */
   RegisterPhysics(new G4EmStandardPhysics());
+
+  G4DecayPhysics* decay = new G4DecayPhysics();
+  decay->SetVerboseLevel(0);
+  RegisterPhysics(decay);
+
+  G4HadronElasticPhysicsHP* hepHP = new G4HadronElasticPhysicsHP();
+  hepHP->SetVerboseLevel(0);
+  RegisterPhysics(hepHP);
+
 
   /**
    * Optical Physics
@@ -20,12 +29,12 @@ LSPhysicsList::LSPhysicsList() : G4VModularPhysicsList() {
   opticalPhysics->Configure(kRayleigh, true);
   opticalPhysics->Configure(kBoundary, true);
   opticalPhysics->Configure(kWLS, false);
-  //opticalPhysics->SetScintillationYieldFactor(1.0);
-  //opticalPhysics->SetScintillationExcitationRatio(0.0);
+  opticalPhysics->SetScintillationYieldFactor(0.3);
+  opticalPhysics->SetScintillationExcitationRatio(0.1);
   //opticalPhysics->SetMaxNumPhotonsPerStep(10000);
   //opticalPhysics->SetMaxBetaChangePerStep(10.0);
   //opticalPhysics->SetTrackSecondariesFirst(kCerenkov, true);
-  //opticalPhysics->SetTrackSecondariesFirst(kScintillation, true);
+  opticalPhysics->SetTrackSecondariesFirst(kScintillation, true);
   RegisterPhysics(opticalPhysics);
 }
 
