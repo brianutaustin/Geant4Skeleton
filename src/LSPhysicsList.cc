@@ -15,10 +15,10 @@ LSPhysicsList::LSPhysicsList() : G4VModularPhysicsList() {
   G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
   opticalPhysics->Configure(kCerenkov, false);
   opticalPhysics->Configure(kScintillation, true);
-  opticalPhysics->Configure(kAbsorption, false);
+  opticalPhysics->Configure(kAbsorption, true);
   opticalPhysics->Configure(kMieHG, false);
-  opticalPhysics->Configure(kRayleigh, false);
-  opticalPhysics->Configure(kBoundary, false);
+  opticalPhysics->Configure(kRayleigh, true);
+  opticalPhysics->Configure(kBoundary, true);
   opticalPhysics->Configure(kWLS, false);
   //opticalPhysics->SetScintillationYieldFactor(1.0);
   //opticalPhysics->SetScintillationExcitationRatio(0.0);

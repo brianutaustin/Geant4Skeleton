@@ -3,6 +3,4 @@
 
 #include "g4root.hh"
 
-
-
 #endif
