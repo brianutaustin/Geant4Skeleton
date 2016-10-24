@@ -1,36 +1,52 @@
 #ifndef LSPrimaryGeneratorAction_h
 #define LSPrimaryGeneratorAction_h 1
 
+#include "LSPrimaryGeneratorMessenger.hh"
+#include "RNGWrapper.hh"
+
+#include <vector>
+#include <iomanip>
+
+
+#include "G4Event.hh"
 #include "G4VUserPrimaryGeneratorAction.hh"
-#include "G4ParticleGun.hh"
-#include "G4LogicalVolumeStore.hh"
-#include "G4LogicalVolume.hh"
-#include "G4Box.hh"
-#include "G4RunManager.hh"
-#include "G4ParticleGun.hh"
-#include "G4ParticleTable.hh"
-#include "G4ParticleDefinition.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4ThreeVector.hh"
+#include "G4DataVector.hh"
+#include "G4ParticleTable.hh"
+#include "G4ParticleGun.hh"
+#include "G4UIdirectory.hh"
+#include "G4UIcmdWithAString.hh"
+#include "G4UIcmdWithoutParameter.hh"
 #include "Randomize.hh"
 #include "globals.hh"
 
-class G4ParticleGun;
+#include "CRYSetup.h"
+#include "CRYGenerator.h"
+#include "CRYParticle.h"
+#include "CRYUtils.h"
+
 class G4Event;
-class G4Box;
 
-class LSPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction {
-public:
-  LSPrimaryGeneratorAction();
-  virtual ~LSPrimaryGeneratorAction();
+class LSPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+{
+  public:
+    LSPrimaryGeneratorAction(const char * filename);
+    ~LSPrimaryGeneratorAction();
 
-  // method from the base class
-  virtual void GeneratePrimaries(G4Event*);
+  public:
+    void GeneratePrimaries(G4Event* anEvent);
+    void InputCRY();
+    void UpdateCRY(std::string* MessInput);
+    void CRYFromFile(G4String newValue);
 
-  // method to access particle gun
-  const G4ParticleGun* GetParticleGun() const { return fParticleGun; }
-
-private:
-  G4ParticleGun*  fParticleGun; // pointer a to G4 gun class
+  private:
+    std::vector<CRYParticle*> *vect; // vector of generated particles
+    G4ParticleTable* particleTable;
+    G4ParticleGun* particleGun;
+    CRYGenerator* gen;
+    G4int InputState;
+    LSPrimaryGeneratorMessenger* gunMessenger;
 };
 
 #endif

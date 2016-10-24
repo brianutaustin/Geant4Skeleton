@@ -7,7 +7,7 @@ LSActionInitialization::~LSActionInitialization() {
 }
 
 void LSActionInitialization::Build() const {
-  SetUserAction(new LSPrimaryGeneratorAction);
+  SetUserAction(new LSPrimaryGeneratorAction("./setup.file"));
 
   LSRunAction* runAction = new LSRunAction();
   SetUserAction(runAction);

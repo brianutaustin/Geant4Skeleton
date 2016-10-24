@@ -26,15 +26,18 @@ include(${Geant4_USE_FILE})
 # NB: headers are included so they will show up in IDEs
 #
 include_directories(${PROJECT_SOURCE_DIR}/include
-                    ${Geant4_INCLUDE_DIR})
+                    ${Geant4_INCLUDE_DIR}
+                    /home/dphan/Simulation/UTKLChips/cry_v1.7/src)
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
 file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
+file(GLOB headers /home/dphan/Simulation/UTKLChips/cry_v1.7/src/*.h)
+file(GLOB headers /home/dphan/ROOT/root-v5.34.36-install/include/*.h)
 
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
 add_executable(LSsim LSsim.cc ${sources} ${headers})
-target_link_libraries(LSsim ${Geant4_LIBRARIES})
+target_link_libraries(LSsim ${Geant4_LIBRARIES} /home/dphan/Simulation/UTKLChips/cry_v1.7/lib/libCRY.a)
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -58,5 +61,3 @@ endforeach()
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS LSsim DESTINATION bin)
-
-
