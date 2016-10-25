@@ -38,7 +38,7 @@ G4UIExecutive * ui = new G4UIExecutive(argc, argv);
     UImanager->ApplyCommand("/control/execute vis.mac");
 #endif
     if (ui->IsGUI()) {
-      UImanager->ApplyCommand("/control/execute gui.mac");
+      UImanager->ApplyCommand("/control/execute vis.mac");
     }
     ui->SessionStart();
     delete ui;

@@ -9,4 +9,4 @@ latitude 30
 altitude 0
 nParticlesMin 10
 nParticlesMax 30
-subboxLength 5
+subboxLength 3

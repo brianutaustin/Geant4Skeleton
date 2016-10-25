@@ -44,6 +44,7 @@ void LSDetectorConstruction::BuildMaterial() {
   fLAr_mt->AddProperty("RINDEX",        LAr_RIndEnergy, LAr_RIND,  LArRIndNum);
   fLAr_mt->AddProperty("ABSLENGTH",     LAr_AbsLEnergy, LAr_ABSL,  LArAbsLNum);
   fLAr_mt->AddConstProperty("SCINTILLATIONYIELD", 24000./MeV);
+  //fLAr_mt->AddConstProperty("SCINTILLATIONYIELD", 1./MeV);
   fLAr_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
   fLAr_mt->AddConstProperty("FASTTIMECONSTANT", 6.*ns);
   fLAr_mt->AddConstProperty("SLOWTIMECONSTANT", 1590.*ns);
@@ -101,11 +102,13 @@ G4VPhysicalVolume * LSDetectorConstruction::Construct() {
             360. * deg);
   larhouseLog = new G4LogicalVolume(larhouseBox, fAl, "LArHouseLog", 0, 0, 0);
 
-  G4VisAttributes* larvolVA = new G4VisAttributes();
-  larvolVA->SetColor(G4Colour(0.8,0.8,0.8));
-  larvolVA->SetForceWireframe(true);
-  larvolLog->SetVisAttributes(larvolVA);
-  larhouseLog->SetVisAttributes(larvolVA);
+  // SiPM surfaces
+  G4Box* sipmA = new G4Box("sipmA", 1.5 * mm, 1.5 * mm, 1 * mm);
+  G4Box* sipmB = new G4Box("sipmB", 1.5 * mm, 1.5 * mm, 1 * mm);
+  G4Box* sipmC = new G4Box("sipmC", 1.5 * mm, 1.5 * mm, 1 * mm);
+  G4LogicalVolume* sipmALog = new G4LogicalVolume(sipmA, fAl, "sipmALog", 0, 0, 0);
+  G4LogicalVolume* sipmBLog = new G4LogicalVolume(sipmB, fAl, "sipmBLog", 0, 0, 0);
+  G4LogicalVolume* sipmCLog = new G4LogicalVolume(sipmC, fAl, "sipmCLog", 0, 0, 0);
 
   /**
    * [World description]
@@ -117,12 +120,7 @@ G4VPhysicalVolume * LSDetectorConstruction::Construct() {
    * @return          [worldPhy as a G4VPhysicalVolume]
    */
 
-  worldBox = new G4Tubs("LArVolumeBox",
-            0,
-            12 * inch,
-            35 * inch,
-            0. * deg,
-            360. * deg);
+  worldBox = new G4Box("WorldBox", world_hx/2., world_hy/2., world_hz/2.);
   worldLog = new G4LogicalVolume(worldBox, fAir, "WorldLog");
 
 
@@ -130,6 +128,9 @@ G4VPhysicalVolume * LSDetectorConstruction::Construct() {
    * Placing volumes in WORLD
    * Remember to define all the needed logical volumes before arranging place hierarchy!
    */
+  G4VPhysicalVolume* sipmAPhy = new G4PVPlacement(0, G4ThreeVector(0, 0, -25 * inch), sipmALog, "sipmAPhy", larvolLog, false, 0, false);
+  G4VPhysicalVolume* sipmBPhy = new G4PVPlacement(0, G4ThreeVector(0, -40 * mm, -25 * inch), sipmBLog, "sipmBPhy", larvolLog, false, 0, false);
+  G4VPhysicalVolume* sipmCPhy = new G4PVPlacement(0, G4ThreeVector(0, 40 * mm, -25 * inch), sipmCLog, "sipmCPhy", worldLog, false, 0,false);
   larhousePhy = new G4PVPlacement(0, G4ThreeVector(), larhouseLog, "LArVolumePhy", worldLog, false, 0);
   larvolPhy = new G4PVPlacement(0, G4ThreeVector(), larvolLog, "LArVolumePhy", worldLog, false, 0);
   worldPhy = new G4PVPlacement(0, G4ThreeVector(), worldLog, "WorldPhy", 0, false, 0, checkOverlaps);

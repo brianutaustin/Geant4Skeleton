@@ -132,10 +132,11 @@ void LSPrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent) {
     particleGun->SetParticleEnergy((*vect)[j]->ke() * MeV);
     //particleGun->SetParticlePosition(G4ThreeVector((*vect)[j]->x() * m, (*vect)[j]->y() * m, (*vect)[j]->z() * m));
     //Dung changed this for the cosmic ray for the whole volume.
-    particleGun->SetParticlePosition(G4ThreeVector((*vect)[j]->x() * m, (*vect)[j]->y() * m, 3 * m));
+    particleGun->SetParticlePosition(G4ThreeVector((*vect)[j]->x() * m, (*vect)[j]->y() * m, 1.5 * m));
     particleGun->SetParticleMomentumDirection(G4ThreeVector((*vect)[j]->u(), (*vect)[j]->v(), (*vect)[j]->w()));
     particleGun->SetParticleTime((*vect)[j]->t());
     particleGun->GeneratePrimaryVertex(anEvent);
+
     delete (*vect)[j];
   }
 }

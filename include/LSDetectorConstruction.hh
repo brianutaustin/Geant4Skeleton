@@ -34,7 +34,7 @@ private:
   G4double world_hx = 3.0 * m;
   G4double world_hy = 3.0 * m;
   G4double world_hz = 3.0 * m;
-  G4Tubs * worldBox;
+  G4Box * worldBox;
   G4LogicalVolume * worldLog;
   G4VPhysicalVolume * worldPhy;
 
